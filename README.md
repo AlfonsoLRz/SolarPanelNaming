@@ -38,8 +38,4 @@ The workflow consists of two main steps:
 ## TODO
 
 - Automatically detect gaps and include new quads representing missing solar panels.
-
-<p align="center" style="width:80%; margin:auto;">
-    <img src="readme_assets/ms_sticks.png"/></br>
-    <em>Latency of voxelizing the Stick & Snow model with different resolution (n x n x n).</em>
-</p>
+- Make it robust to manage arrays that have different directions. Currently, a global direction is averaged and every array is considered to expand in such a direction.
