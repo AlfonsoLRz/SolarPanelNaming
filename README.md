@@ -35,7 +35,22 @@ The workflow consists of two main steps:
     <em>Ordered identification of arrays and panels.</em>
 </p>
 
+## Autofill
+
+The script `identify_missing_panels.ipynb` can detect missing panels from a previously generated `.shp` file. From the previous step, the number of columns and rows is known for each array and thus the solar plantation can be filled with those panels that were not detected in the algorithm of your preference.
+
+The only parameter that can be configured during this process is the threshold distance considered to decide whether the space between two consecutive panels is too much or not (`threshold_distance`). Note that this factor will be multiplied by the average panel width, and therefore, can be specified in terms of %.
+
+<p align="center">
+    <img src="assets/missing_panels.png"/></br>
+    <em>Initial panel detection with missing geometry.</em>
+</p>
+
+<p align="center">
+    <img src="assets/identified_panels.png"/></br>
+    <em>Fixed geometry of a solar plantation.</em>
+</p>
+
 ## TODO
 
-- Automatically detect gaps and include new quads representing missing solar panels.
 - Make it robust to manage arrays that have different directions. Currently, a global direction is averaged and every array is considered to expand in such a direction.
