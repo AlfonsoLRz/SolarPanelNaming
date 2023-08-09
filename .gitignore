@@ -154,3 +154,6 @@ cython_debug/
 # Assets
 qgis_assets/
 results/
+
+# Evaluation
+compare_centroids.*

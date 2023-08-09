@@ -19,6 +19,19 @@ class Panel:
         centroid[1] /= len(self.geometry)
         self.centroid = centroid
 
+    def fill(self, elem):
+        if 'ID_ARRAY' in elem['properties']:
+            self.id_array = elem['properties']['ID_ARRAY']
+        if 'ID_CELL' in elem['properties']:
+            self.id_panel = elem['properties']['ID_CELL']
+        if 'ID_ROW' in elem['properties']:
+            self.row = elem['properties']['ID_ROW']
+        if 'ID_COL' in elem['properties']:
+            self.col = elem['properties']['ID_COL']
+
+        self.geometry = elem['geometry']['coordinates'][0]
+        self.compute_centroid()
+
     def get_area(self):
         area = 0
         for i in range(len(self.geometry) - 1):

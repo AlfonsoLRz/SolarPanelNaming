@@ -8,7 +8,7 @@ def plot_panels(panels, color_code, draw_text=False, text=None, draw_legend=True
 
     new_panels, new_colors = [], []
     for i in range(len(panels)):
-        if panels[i].id_array != -1:
+        if panels[i] is not None and panels[i].id_array != -1:
             new_panels.append(panels[i])
             new_colors.append(color_code[i])
     panels = new_panels
