@@ -10,9 +10,10 @@ def plot_panels(panels, color_code, draw_text=False, text=None, draw_legend=True
     for i in range(len(panels)):
         if panels[i] is not None and panels[i].id_array != -1:
             new_panels.append(panels[i])
-            new_colors.append(color_code[i])
+            if color_code is not None:
+                new_colors.append(color_code[i])
     panels = new_panels
-    color_code = new_colors
+    color_code = new_colors if color_code is not None else None
 
     # Compute limits of panels' centroid
     max_x = -np.inf
@@ -62,6 +63,44 @@ def plot_panels(panels, color_code, draw_text=False, text=None, draw_legend=True
 
     if remove_axis:
         plt.axis('off')
+    plt.tight_layout()
+    if savefig is not None:
+        plt.savefig(savefig, dpi=500, transparent=True)
+    plt.show()
+
+
+def plot_rotated_panels(panels, norm_x, norm_color=None, savefig=None):
+    fig, ax = plt.subplots()
+
+    # Compute limits of panels' centroid
+    max_x = -np.inf
+    min_x = np.inf
+    max_y = -np.inf
+    min_y = np.inf
+
+    for (idx, panel) in enumerate(panels):
+        x = []
+        y = []
+        for point in panels[idx].geometry:
+            current_x, current_y = point[0] * norm_x[0] + point[1] * norm_x[1], -point[0] * norm_x[1] + point[1] * \
+                                   norm_x[0]
+            x.append(current_x)
+            y.append(current_y)
+            max_x = max(max_x, current_x)
+            min_x = min(min_x, current_x)
+            max_y = max(max_y, current_y)
+            min_y = min(min_y, current_y)
+
+        if norm_color is None:
+            ax.plot(x, y, color='black')
+        else:
+            # Plot filled polygon
+            ax.fill(x, y, color=norm_color[idx], alpha=1)
+            ax.plot(x, y, color='black', linewidth=1.5)
+
+    fig.set_size_inches(10, 10 * (max_y - min_y) / (max_x - min_x))
+
+    plt.axis('off')
     plt.tight_layout()
     if savefig is not None:
         plt.savefig(savefig, dpi=500, transparent=True)
