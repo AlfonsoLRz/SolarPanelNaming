@@ -1,4 +1,4 @@
-# Naming of solar panels
+# Identification of solar panels
 
 ![jupyter](https://img.shields.io/github/languages/top/AlfonsoLRz/SolarPanelManager) 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
